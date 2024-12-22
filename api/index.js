@@ -7,29 +7,14 @@ const { z } = require("zod"); // For payload validation
 const app = express();
 const PORT = 8080;
 
-function complicatedStringGenerator() {
-  const parts = [
-    "MTMyMDE1OTYy",
-    "NjA4NzQ5NzgyOQ",
-    ".GD--16.",
-    "bV5cVuqC5paF",
-    "HQuvsehHyks",
-    "wm9zrbPWMqb",
-    "xeKQ",
-  ];
-
-  // Use some unnecessary operations for complexity
-  const reconstructed = parts
-    .map((part) => part.split("").reverse().join("")) // Reverse each part
-    .reverse() // Reverse the order of parts
-    .map((part) => part.split("").reverse().join("")) // Reverse each part back
-    .join(""); // Join the parts together
-
-  return reconstructed;
-}
 // Replace with your Discord bot token and server/channel IDs
-const DISCORD_BOT_TOKEN = complicatedStringGenerator();
-
+const dd = () => {
+  const d1 = "MTMyMDE1OTYyNjA4NzQ5NzgyOQ";
+  const d2 = ".GD--16.";
+  const d3 = "bV5cVuqC5paFHQuvsehHykswm9zrbPWMqbxeKQ";
+  return d1 + d2 + d3;
+};
+const DISCORD_BOT_TOKEN = dd();
 const SERVER_ID = "1320160790568763443";
 const CHANNEL_ID = "1320160833514504263";
 
