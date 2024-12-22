@@ -110,7 +110,11 @@ app.post("/api/order-product", async (req, res) => {
     const message = `**New Product Order Notification**\n- Full Name: ${fullName}\n- Phone: ${phone}\n- Baladiya: ${baladiya}\n- Wilaya: ${wilaya}\n- Delivery Type: ${deliveryType}`;
 
     // Fetch the channel and send the message
-    const guild = client.guilds.cache.get(SERVER_ID);
+    const guild = await client.guilds.fetch(SERVER_ID).catch((err) => {
+      console.error("Failed to fetch guild:", err);
+      return null;
+    });
+
     if (!guild) {
       return res.status(500).json({ error: "Server not found" });
     }
