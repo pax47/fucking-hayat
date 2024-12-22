@@ -100,7 +100,7 @@ const orderSchema = z.object({
 });
 
 // Endpoint to handle product orders
-app.post("/order-product", async (req, res) => {
+app.post("/api/order-product", async (req, res) => {
   try {
     // Validate the request payload
     const { fullName, phone, baladiya, wilaya, deliveryType } =
