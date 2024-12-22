@@ -119,13 +119,16 @@ app.post("/api/order-product", async (req, res) => {
       return res.status(500).json({ error: "Server not found" });
     }
 
-    const channel = guild.channels.cache.get(CHANNEL_ID);
+    const channel = await guild.channels.fetch(CHANNEL_ID).catch((err) => {
+      console.error("Failed to fetch channel:", err);
+      return null;
+    });
+
     if (!channel || !channel.isTextBased()) {
       return res
         .status(500)
         .json({ error: "Channel not found or is not text-based" });
     }
-
     await channel.send(message);
 
     // Respond to the client
