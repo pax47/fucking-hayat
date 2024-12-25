@@ -19,54 +19,54 @@ const SERVER_ID = "1320160790568763443";
 const CHANNEL_ID = "1320160833514504263";
 
 const wilayas = [
-  "Adrar",
-  "Chlef",
-  "Laghouat",
-  "Oum El Bouaghi",
-  "Batna",
-  "Béjaïa",
-  "Biskra",
-  "Béchar",
-  "Blida",
-  "Bouira",
-  "Tamanrasset",
-  "Tébessa",
-  "Tlemcen",
-  "Tiaret",
-  "Tizi Ouzou",
-  "Algiers",
-  "Djelfa",
-  "Jijel",
-  "Sétif",
-  "Saïda",
-  "Skikda",
-  "Sidi Bel Abbès",
-  "Annaba",
-  "Guelma",
-  "Constantine",
-  "Médéa",
-  "Mostaganem",
-  "M'Sila",
-  "Mascara",
-  "Ouargla",
-  "Oran",
-  "El Bayadh",
-  "Illizi",
-  "Bordj Bou Arréridj",
-  "Boumerdès",
-  "El Tarf",
-  "Tindouf",
-  "Tissemsilt",
-  "El Oued",
-  "Khenchela",
-  "Souk Ahras",
-  "Tipaza",
-  "Mila",
-  "Aïn Defla",
-  "Naâma",
-  "Aïn Témouchent",
-  "Ghardaïa",
-  "Relizane",
+  "أدرار",
+  "الشلف",
+  "الأغواط",
+  "أم البواقي",
+  "باتنة",
+  "بجاية",
+  "بسكرة",
+  "بشار",
+  "البليدة",
+  "البويرة",
+  "تمنراست",
+  "تبسة",
+  "تلمسان",
+  "تيارت",
+  "تيزي وزو",
+  "الجزائر",
+  "الجلفة",
+  "جيجل",
+  "سطيف",
+  "سعيدة",
+  "سكيكدة",
+  "سيدي بلعباس",
+  "عنابة",
+  "قالمة",
+  "قسنطينة",
+  "المدية",
+  "مستغانم",
+  "المسيلة",
+  "معسكر",
+  "ورقلة",
+  "وهران",
+  "البيض",
+  "إليزي",
+  "برج بوعريريج",
+  "بومرداس",
+  "الطارف",
+  "تندوف",
+  "تيسمسيلت",
+  "الوادي",
+  "خنشلة",
+  "سوق أهراس",
+  "تيبازة",
+  "ميلة",
+  "عين الدفلى",
+  "النعامة",
+  "عين تموشنت",
+  "غرداية",
+  "غليزان",
 ];
 
 // Initialize the Discord client
@@ -96,18 +96,19 @@ const orderSchema = z.object({
   phone: z.string().regex(/^[0-9]{10,15}$/, "Invalid phone number format"),
   baladiya: z.string(),
   wilaya: z.enum(wilayas),
-  deliveryType: z.literal("A Domicile"),
+  color: z.string(),
 });
 
 // Endpoint to handle product orders
 app.post("/api/order-product", async (req, res) => {
   try {
     // Validate the request payload
-    const { fullName, phone, baladiya, wilaya, deliveryType } =
-      orderSchema.parse(req.body);
+    const { fullName, phone, baladiya, wilaya, color } = orderSchema.parse(
+      req.body
+    );
 
     // Format the message to send to Discord
-    const message = `**New Product Order Notification**\n- Full Name: ${fullName}\n- Phone: ${phone}\n- Baladiya: ${baladiya}\n- Wilaya: ${wilaya}\n- Delivery Type: ${deliveryType}`;
+    const message = `**New Product Order Notification**\n- Full Name: ${fullName}\n- Phone: ${phone}\n- Baladiya: ${baladiya}\n- Wilaya: ${wilaya}\n- color: ${color}\n`;
 
     // Fetch the channel and send the message
     const guild = await client.guilds.fetch(SERVER_ID).catch((err) => {
